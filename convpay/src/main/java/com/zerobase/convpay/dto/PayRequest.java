@@ -1,5 +1,7 @@
 package com.zerobase.convpay.dto;
 
+import com.zerobase.convpay.type.ConvenienceType;
+
 public class PayRequest {
 
   // 편의점 종류

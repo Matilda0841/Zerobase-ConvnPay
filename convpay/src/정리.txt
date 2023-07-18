@@ -2,12 +2,6 @@
 
 dto 데이터 트래스 오브젝트 : 외부 통신 연결시 필요한 객체를 만드는 클래스들
 
-
-
-
-
-
-
 ConveniencePayService
 
 pay() 결제
@@ -46,11 +40,10 @@ payResponse
     return new PayResponse(PayResult.SUCCESS,100);// 결과를 응답으로 받고 결과는 성공시, 어마운트를 받고
     이것이 클래스 이름이라면, 이 클래스의 인스턴스를 생성하려면 new 키워드를 사용해야 합니다
 
+----------------------------------------------------------------------------
     ctrl + shift+ t > test이동
-
-   @test 코드 만들어서
-
-   // 파일 설정 >> 라이브탬플릿 > + 눌러서 test >> 함수 만들수 있음
+    @test 코드 만들어서
+    파일 설정 >> 라이브탬플릿 > + 눌러서 test >> 함수 만들수 있음
 
      @test
      void(){
@@ -64,6 +57,20 @@ payResponse
     When: 테스트하려는 행동을 수행하는 단계입니다. 여기서는 ConveniencePayService.pay(payRequest)를 호출하여 지불 요청을 처리하고, 그 결과를 payResponse에 저장합니다.
 
     Then: 테스트 결과를 확인하는 단계입니다. 여기서는 assertEquals 메서드를 사용하여 실제 결과가 예상한 결과와 일치하는지 확인합니다. 이 경우에는 지불 결과(getPayResult())가 성공(PayResult.SUCCESS)이고, 지불 금액(getPaidAmount())이 100원인지 확인합니다
+----------------------------------------------------------------------------
+  private final MoneyAdapter moneyAdapter = new MoneyAdapter();
+  // private 걸고 final >> 만들면 바꿀일 없고, 바꾸면 안되기 때문에
 
+  --------------------------------
+    public MoneyUseResult use(Integer payAmount){ // 사용
+      //편의점의 정보를 알필요도 없고, 단순히 돈 얼마나 쓰느지에 대해만 알면 되기 때문에
 
-  }
+      // 사용결과이고 열거형으로 바꿀 예정
+
+    }// 사용
+    ------------------------------------------
+    public enum MoneyUseResult {
+      USE_SUCCESS,
+      USE_FAIL
+    }
+    -------------------------------------------------

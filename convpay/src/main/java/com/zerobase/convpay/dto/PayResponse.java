@@ -1,5 +1,7 @@
 package com.zerobase.convpay.dto;
 
+import com.zerobase.convpay.type.PayResult;
+
 public class PayResponse {
   // 결제 결과
   PayResult payResult;
@@ -26,5 +28,13 @@ public class PayResponse {
 
   public void setPaidAmount(Integer paidAmount) {
     this.paidAmount = paidAmount;
+  }
+
+  @Override
+  public String toString() {
+    return "PayResponse{" +
+        "payResult=" + payResult +
+        ", paidAmount=" + paidAmount +
+        '}';
   }
 }
