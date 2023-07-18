@@ -1,0 +1,69 @@
+서비스 패키지 : 서비스를 제공하는 핵심적인 로직이 많이 들어가  는  패키지를 서비스라고 한다
+
+dto 데이터 트래스 오브젝트 : 외부 통신 연결시 필요한 객체를 만드는 클래스들
+
+
+
+
+
+
+
+ConveniencePayService
+
+pay() 결제
+payCancel() 결제 취소
+---------------------
+
+MoneyAdapter
+
+use() // 돈 사용
+useCancel() // 돈 취소
+----------------------------
+
+payRequest
+convenience type alt 인서트 >> 열거형 g25, gu, seven // 편의점 타입
+
+Integer PayAmount //결제 금액
+
+게터 세터 + 생성자 생성
+-----------------------------------
+
+payResponse
+    //결제 결과
+  PayResult payResult; 열거형 SUCCESS, FAIL
+   // 결제 성공금액
+  Integer paidAmount;
+
+게터 세터 + 생성자 생성
+-----------------------------
+
+이렇게 만들어주고
+----------------------------------------------------------------------
+
+  public void pay(){ // 결제
+  public PayResponse pay(PayRequest payRequest){ // 응답을 결과로 가지고 나올 예정이기에 음답을 넣고 요청을 가지고 옴
+
+    return new PayResponse(PayResult.SUCCESS,100);// 결과를 응답으로 받고 결과는 성공시, 어마운트를 받고
+    이것이 클래스 이름이라면, 이 클래스의 인스턴스를 생성하려면 new 키워드를 사용해야 합니다
+
+    ctrl + shift+ t > test이동
+
+   @test 코드 만들어서
+
+   // 파일 설정 >> 라이브탬플릿 > + 눌러서 test >> 함수 만들수 있음
+
+     @test
+     void(){
+         //given 어떤 데이터가 있을때
+         //when 어떤 동작을 하면
+         //then 어떤 결과가 나와야 한다
+     }
+
+    Given: 테스트의 초기 조건을 설정하는 단계입니다. 이 경우에는 PayRequest 객체를 생성하여 이 객체에 G25 편의점 유형과 100원의 지불 금액을 할당합니다.
+
+    When: 테스트하려는 행동을 수행하는 단계입니다. 여기서는 ConveniencePayService.pay(payRequest)를 호출하여 지불 요청을 처리하고, 그 결과를 payResponse에 저장합니다.
+
+    Then: 테스트 결과를 확인하는 단계입니다. 여기서는 assertEquals 메서드를 사용하여 실제 결과가 예상한 결과와 일치하는지 확인합니다. 이 경우에는 지불 결과(getPayResult())가 성공(PayResult.SUCCESS)이고, 지불 금액(getPaidAmount())이 100원인지 확인합니다
+
+
+  }
