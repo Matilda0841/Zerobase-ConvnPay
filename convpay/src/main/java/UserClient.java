@@ -6,12 +6,15 @@ import com.zerobase.convpay.dto.PayResponse;
 import com.zerobase.convpay.service.ConveniencePayService;
 import com.zerobase.convpay.type.ConvenienceType;
 import com.zerobase.convpay.type.PayMethodType;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 public class UserClient {
   public static void main(String[] args) {
 
-    ApplicationConfig applicationConfig =  new ApplicationConfig();
-    ConveniencePayService conveniencePayService = applicationConfig.conveniencePayServiceDiscountPayMethod();
+    ApplicationContext applicationContext = new AnnotationConfigApplicationContext(ApplicationConfig.class);
+
+    ConveniencePayService conveniencePayService = applicationContext.getBean("conveniencePayService",ConveniencePayService.class);
 
     PayRequest payRequest = new PayRequest(PayMethodType.CARD, ConvenienceType.G25, 1000);
     PayResponse payResponse = conveniencePayService.pay(payRequest);
