@@ -10,10 +10,18 @@ import com.zerobase.convpay.type.PayMethodType;
 import com.zerobase.convpay.type.PayResult;
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
+import java.util.HashSet;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class ConveniencePayServiceTest {
-  ConveniencePayService conveniencePayService =  new ConveniencePayService();
+  ConveniencePayService conveniencePayService =  new ConveniencePayService(
+      new HashSet<>(
+          Arrays.asList(new MoneyAdapter(),new CardAdapter())
+      ),
+      new DiscountByConvenience()
+  );
 
 
   @Test
@@ -24,12 +32,12 @@ class ConveniencePayServiceTest {
     PayResponse payResponse = conveniencePayService.pay(payRequest);
     //then 어떤 결과가 나와야 한다
     assertEquals(PayResult.SUCCESS,payResponse.getPayResult());
-    assertEquals(50,payResponse.getPaidAmount());
+    assertEquals(35,payResponse.getPaidAmount());
   }
   @Test
     void pay_fail(){
       //given 어떤 데이터가 있을때
-    PayRequest payRequest = new PayRequest(PayMethodType.MONEY,ConvenienceType.G25,1000_001);
+    PayRequest payRequest = new PayRequest(PayMethodType.MONEY,ConvenienceType.G25,1500_001);
       //when 어떤 동작을 하면
     PayResponse payResponse = conveniencePayService.pay(payRequest);
     //then 어떤 결과가 나와야 한다

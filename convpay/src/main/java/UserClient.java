@@ -1,3 +1,4 @@
+import com.zerobase.convpay.config.ApplicationConfig;
 import com.zerobase.convpay.dto.PayCancelRequest;
 import com.zerobase.convpay.dto.PayCancelResponse;
 import com.zerobase.convpay.dto.PayRequest;
@@ -8,7 +9,9 @@ import com.zerobase.convpay.type.PayMethodType;
 
 public class UserClient {
   public static void main(String[] args) {
-    ConveniencePayService conveniencePayService = new ConveniencePayService();
+
+    ApplicationConfig applicationConfig =  new ApplicationConfig();
+    ConveniencePayService conveniencePayService = applicationConfig.conveniencePayServiceDiscountPayMethod();
 
     PayRequest payRequest = new PayRequest(PayMethodType.CARD, ConvenienceType.G25, 1000);
     PayResponse payResponse = conveniencePayService.pay(payRequest);
